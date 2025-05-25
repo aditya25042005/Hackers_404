@@ -35,7 +35,7 @@ const BotDesc: React.FC = () => {
         transition={{ duration: 1 }}
         className="mb-12"
       >
-        <h1 className="text-4xl font-bold mb-4 text-red-600">Empowering Students. Guiding Futures.</h1>
+        <h1 className="text-4xl font-bold mb-4 text-black">Empowering Students. Guiding Futures.</h1>
         <p className="text-lg leading-relaxed text-gray-900">
           The AI Career Counselor Bot is a smart virtual counselor created to transform the process of career decision-making for students and job seekers. Driven by state-of-the-art AI, the bot is a 24/7 personal career mentor that offers customized advice, responds to career queries, and suggests appropriate career streams based on strengths, interests, and educational qualifications.
           <br /><br />
@@ -53,12 +53,12 @@ const BotDesc: React.FC = () => {
         {benefits.map(({ title, desc, icon }, i) => (
           <div
             key={i}
-            style={{ backgroundColor: '#E52020' }}
+            style={{ backgroundColor: '#EFEFEF' }}
             className="bg-opacity-80 rounded-lg p-6 shadow-lg flex flex-col items-start space-y-3 hover:bg-red-700 transition"
           >
             <div className="text-4xl">{icon}</div>
-            <h3 className="text-xl font-semibold">{title}</h3>
-            <p className="text-gray-200">{desc}</p>
+            <h3 className="text-xl text-red-600 font-semibold">{title}</h3>
+            <p className="text-black">{desc}</p>
           </div>
         ))}
       </motion.div>
@@ -70,7 +70,7 @@ const BotDesc: React.FC = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
       >
-        <h2 className="text-2xl font-semibold mb-4 text-red-500">Key Features</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-black">Key Features</h2>
         <ul className="list-disc list-inside space-y-3 text-gray-900 text-lg">
           <li> Personalized Career Suggestions based on user input and preferences.</li>
           <li> AI-Powered Q&A to answer queries about fields, courses, and career scopes.</li>
@@ -87,7 +87,7 @@ const BotDesc: React.FC = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, delay: 0.8 }}
       >
-        <h2 className="text-2xl font-semibold mb-4 text-red-500">Why it matters</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-black">Why it matters</h2>
         <p className="text-lg text-gray-700 leading-relaxed mb-4">
           In a world full of options, finding the correct career choice can be daunting. Our AI Career Counselor Bot makes it easy by providing data-driven, unbiased, and accessible career guidance—anywhere, anytime.
         </p>
