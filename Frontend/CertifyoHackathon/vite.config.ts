@@ -2,10 +2,21 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
 
-
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(),
-    tailwindcss(),
+  plugins: [
+    react(),
+    tailwindcss()
   ],
+  server: {
+    host: true,
+    port: Number(process.env.PORT) || 5173,
+  },
+  preview: {
+    host: true,
+    port: Number(process.env.PORT) || 5173,
+    allowedHosts: [
+      'hackers-404-4.onrender.com'
+    ]
+  }
 })
