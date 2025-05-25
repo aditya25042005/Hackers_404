@@ -91,7 +91,7 @@ def run_bot(email,user_new,message,questions):
 
     # Phase 3: Follow-up Q&A
     elif user_new==False and user_doc:
-        user_question = input("\nAsk a follow-up (or type 'quit'): ")
+        user_question = message
         answers = user_doc["user_answers"]
         follow_up_prompt = f"Based on the user's profile {answers}, answer this question: {user_question}"
         response = model.generate_content(follow_up_prompt)
