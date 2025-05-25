@@ -10,6 +10,7 @@ try{
     const schema = joi.object({
         email: joi.string().email().required(),
         message: joi.string().required(),
+        //question:joi.array().items(joi.string()).required(),
         
     });
   
@@ -17,33 +18,24 @@ try{
     if (error) {
         return res.status(400).json({ message: error.message });
     }
-    const { email, message,id } = req.body;
-    const newChatMessage = {
-  from: 'user',
-  text: message
-  // no time here, it will be auto-added by Mongoose
-};
+    const { email, message,questions=[] } = req.body;
+    let news =true;
 
-
-
-     // email=req.user
-
-     //send to mongo db req of user
-
-     const result = await History.updateOne(
-  { email: email },
-  { $push: { chat_history: newChatMessage } }
-);
-
+if(questions.length===0){
+    news=false;
+}
 console.log(result);
 
     try {
     // Replace with the API you want to call
-  /*  const response = await axios.post('https://api.example.com/data', {
+    const response = await axios.post('http://127.0.0.1:5000/bot', {
       email: email,
+      questions: questions,
+      user_new:news,
       message: message
     });
-    console.log(response.data);*/
+    console.log(response.data);
+
     const recent = await History.findOne(
   { email: email },
   {  _id: 0,
@@ -81,13 +73,13 @@ catch (err) {
       // const email=req.user
 
        const history =await History.find({ email: email });
-       if (!history) {
-           return res.status(404).json({ message: 'No history found for this user' });
+       if (history.length===0) {
+           return res.status(404).json({ message: false });
        }
        else{
 
 
-              res.status(200).json(history[0]["chat_history"]);
+              res.status(200).json({history:history[0]["chat_history"],message:true});
        }
 
 
