@@ -56,37 +56,37 @@ def run_bot():
         ("education", "What is your highest level of education?"),
         ("preferences", "Do you have any preferences for your future job? (e.g., remote work, good salary, creative role)")
     ]
-
+    user_new=True
     answers = {}
+    if user_new==True:
+        for key, question in questions:
+            add_message(session_id, "bot", question)
+            print(f" {question}")
+            answer = input("You: ")
+            add_message(session_id, "user", answer)
+            answers[key] = answer
+            update_answers(session_id, key, answer)
 
-    for key, question in questions:
-        add_message(session_id, "bot", question)
-        print(f" {question}")
-        answer = input("You: ")
-        add_message(session_id, "user", answer)
-        answers[key] = answer
-        update_answers(session_id, key, answer)
+            # Phase 2: Career Suggestion
+            prompt = f"""
+        Act like a professional career counselor.
 
-    # Phase 2: Career Suggestion
-    prompt = f"""
-Act like a professional career counselor.
+        User Profile:
+        - Interests: {answers['interests']}
+        - Strengths: {answers['strengths']}
+        - Education: {answers['education']}
+        - Preferences: {answers['preferences']}
 
-User Profile:
-- Interests: {answers['interests']}
-- Strengths: {answers['strengths']}
-- Education: {answers['education']}
-- Preferences: {answers['preferences']}
-
-Suggest:
-1. Two career paths with short explanations.
-2. Key skills needed for each path.
-3. Two beginner-friendly learning resources (with links) per path.
-Respond in a friendly, helpful tone.
-"""
-    response = model.generate_content(prompt)
-    suggestion = response.text
-    add_message(session_id, "bot", suggestion)
-    print(f"\n Suggestion:\n{suggestion}")
+        Suggest:
+        1. Two career paths with short explanations.
+        2. Key skills needed for each path.
+        3. Two beginner-friendly learning resources (with links) per path.
+        Respond in a friendly, helpful tone.
+        """
+            response = model.generate_content(prompt)
+            suggestion = response.text
+            add_message(session_id, "bot", suggestion)
+            print(f"\n Suggestion:\n{suggestion}")
 
     # Phase 3: Follow-up Q&A
     while True:
