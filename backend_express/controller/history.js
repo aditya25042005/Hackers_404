@@ -18,7 +18,7 @@ try{
     if (error) {
         return res.status(400).json({ message: error.message });
     }
-    const { email, message,questions=[] } = req.body;
+    const { email, message,questions={} } = req.body;
     let news =true;
 
 if(questions.length===0){

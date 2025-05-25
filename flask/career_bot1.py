@@ -63,10 +63,12 @@ def run_bot(email,user_new,message,questions):
     print("Welcome to the Career Bot!")
     if user_new==True:
         session_id = start_session(email)
-        for key, question in questions:
-            add_message(session_id, "bot", question)
+        for qdict in questions: 
+         for key, question in qdict.items():
+ 
+            add_message(session_id, "bot", key)
             print(f" {question}")
-            answer = input("You: ")
+            answer = question
             add_message(session_id, "user", answer)
             answers[key] = answer
             update_answers(session_id, key, answer)
@@ -75,12 +77,11 @@ def run_bot(email,user_new,message,questions):
             prompt = f"""
         Act like a professional career counselor.
 
-        User Profile:
-        - Interests: {answers['interests']}
-        - Strengths: {answers['strengths']}
-        - Education: {answers['education']}
-        - Preferences: {answers['preferences']}
-
+       User Profile:
+- Interests: {answers.get('interests', 'Not provided')}
+- Strengths: {answers.get('strengths', 'Not provided')}
+- Education: {answers.get('education', 'Not provided')}
+- Preferences: {answers.get('preferences', 'Not provided')}
         Suggest:
         1. Two career paths with short explanations.
         2. Key skills needed for each path.

@@ -11,10 +11,10 @@ def login():
    email=data["email"]
    message=data["message"]
    user_new=data["user_new"]
-   questions=data.get("questions") or []
+   questions=data.get("questions") or {}
  
    if(len(questions)==0):
-      questions=[]
+      questions={}
    run_bot(email,user_new, message, questions)
    
    return jsonify({"data": data, "message": "Data received successfully"}), 200
