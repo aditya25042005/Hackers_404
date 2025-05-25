@@ -25,9 +25,7 @@ This is a Python-based chatbot that provides career advice based on user input. 
 - **python-dotenv**: For managing environment variables
 - **Google Generative AI (Gemini)**: Used to generate career suggestions via natural language prompts
 
-### Frontend
-- Simple command-line interface (CLI) for interaction
-- Can be extended with a web frontend using HTML/CSS/JavaScript or frameworks like React
+
 ## Setup Instructions
 
 ### 1. Clone the Repository
