@@ -172,6 +172,31 @@ res.status(400).json({
 
 }
 
+export const give_email=async(req,res)=>{
+
+
+return res.status(200).json({email:req.user})
+
+
+
+
+}
+
+
+ export const  logout=async(req,res)=>{
+
+try{
+    console.log("f")
+res.clearCookie('token');
+return res.status(200).json({message:"user logged out successfully"})
+}
+catch(err){
+    console.log(err)
+    return res.status(400).json({message:"error in logging out"})
+
+
+}
+}
 /*export const secureRoute = async (req, res) => {
   const { idToken } = req.body;
 
