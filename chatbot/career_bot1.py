@@ -61,7 +61,7 @@ def run_bot():
 
     for key, question in questions:
         add_message(session_id, "bot", question)
-        print(f"🤖 {question}")
+        print(f" {question}")
         answer = input("You: ")
         add_message(session_id, "user", answer)
         answers[key] = answer
@@ -86,13 +86,13 @@ Respond in a friendly, helpful tone.
     response = model.generate_content(prompt)
     suggestion = response.text
     add_message(session_id, "bot", suggestion)
-    print(f"\n🎯 Suggestion:\n{suggestion}")
+    print(f"\n Suggestion:\n{suggestion}")
 
     # Phase 3: Follow-up Q&A
     while True:
         user_question = input("\nAsk a follow-up (or type 'quit'): ")
         if user_question.lower() == "quit":
-            print("🔚 Session ended.")
+            print(" Session ended.")
             break
 
         follow_up_prompt = f"Based on the user's profile {answers}, answer this question: {user_question}"
@@ -100,7 +100,7 @@ Respond in a friendly, helpful tone.
         answer = response.text
         add_message(session_id, "user", user_question)
         add_message(session_id, "bot", answer)
-        print(f"🤖 {answer}")
+        print(f" {answer}")
 
 if __name__ == "__main__":
     run_bot()
