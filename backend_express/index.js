@@ -15,12 +15,22 @@ console.log("connected to database")
 })
 
 const app = express()
+const allowedOrigins = [
+  'http://localhost:5173',                    // Local development
+  'https://hackers-404-4.onrender.com'        // Deployed frontend on Render
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',  // frontend origin
-  credentials: true                 // allow credentials (cookies)
-}))
-
-
+  origin: function (origin, callback) {
+    // allow requests with no origin like mobile apps or curl
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS policy: This origin is not allowed - ' + origin));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json(),cookieParser());          // parse JSON bodies
 
 

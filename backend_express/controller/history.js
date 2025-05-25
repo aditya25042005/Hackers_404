@@ -29,7 +29,7 @@ if(!questions.length){
 
     try {
     // Replace with the API you want to call
-    const response = await axios.post('http://127.0.0.1:5000/bot', {
+    const response = await axios.post('https://hackers-404-2.onrender.com//bot', {
       email: email,
       questions: questions,
       user_new:news,

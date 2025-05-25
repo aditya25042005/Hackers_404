@@ -15,10 +15,14 @@ def login():
  
    if(len(questions)==0):
       questions={}
-   run_bot(email,user_new, message, questions)
+   try:
+    run_bot(email,user_new, message, questions)
    
-   return jsonify({"data": data, "message": "Data received successfully"}), 200
-
+    return jsonify({"data": data, "message": "Data received successfully"}), 200
+   
+   except Exception as e:
+      print(f"Error: {e}")
+      return jsonify({"error": str(e)}), 500
 
 
 
