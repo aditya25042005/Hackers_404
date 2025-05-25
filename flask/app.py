@@ -1,8 +1,11 @@
 from flask import Flask
 from flask import request,jsonify
 from career_bot1 import run_bot
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)  # Allow all origins
 
 @app.route('/bot', methods=[ 'POST'])
 def login():
