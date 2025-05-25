@@ -1,0 +1,13 @@
+/* Make the entire page take full height */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Push footer to the bottom */
+.content-wrap {
+  flex: 1;
+}
+
+
