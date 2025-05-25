@@ -173,11 +173,28 @@ res.status(400).json({
 }
 
 export const give_email=async(req,res)=>{
+try{
+
+const token=req.cookies.token;
+if(!token){
+    return res.status(401).json({message:"Unauthorized"})
+    
+}
+console.log(token);
+const decoded=jwt.verify(token,'aditya')
+   // req.user=decoded.email;
+  //  console.log({"email":decoded});
+    return res.status(200).json({email:decoded.email})
 
 
-return res.status(200).json({email:req.user})
 
 
+}
+catch(err){
+
+ return res.status(401).json({message:"Unauthorized invalid token"})
+
+}
 
 
 }
