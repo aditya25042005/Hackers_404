@@ -9,12 +9,13 @@ def login():
    data=request.json
    print(data)
    email=data["email"]
-   message=data["message"],
-   user_new=data["user_new"],
+   message=data["message"]
+   user_new=data["user_new"]
    questions=data.get("questions") or []
+ 
    if(len(questions)==0):
       questions=[]
-   run_bot(email, message, user_new, questions)
+   run_bot(email,user_new, message, questions)
    
    return jsonify({"data": data, "message": "Data received successfully"}), 200
 

@@ -52,14 +52,17 @@ def update_answers(session_id, key, answer):
     )
 
 def run_bot(email,user_new,message,questions):
-    session_id = start_session(email)
+    print(f"Email: {email}, User New: {user_new}, Message: {message}, Questions: {questions}")
+    print(user_new)
     
     # Phase 1: Ask questions
     collection=db.histories
     user_doc = collection.find_one({"email": email}, {"_id": 1, "user_answers": 1})
     
     answers = {}
+    print("Welcome to the Career Bot!")
     if user_new==True:
+        session_id = start_session(email)
         for key, question in questions:
             add_message(session_id, "bot", question)
             print(f" {question}")
@@ -91,14 +94,16 @@ def run_bot(email,user_new,message,questions):
 
     # Phase 3: Follow-up Q&A
     elif user_new==False and user_doc:
+        print("Welcome back! Let's continue.")
         user_question = message
         answers = user_doc["user_answers"]
         follow_up_prompt = f"Based on the user's profile {answers}, answer this question: {user_question}"
         response = model.generate_content(follow_up_prompt)
         answer = response.text
         #fron user_doc
-        add_message(user_doc._id, "user", user_question)
-        add_message(user_doc._id, "bot", answer)
+        session_id = user_doc["_id"]
+        add_message(session_id, "user", user_question)
+        add_message(session_id, "bot", answer)
         print(f" {answer}")
 
 if __name__ == "__main__":
