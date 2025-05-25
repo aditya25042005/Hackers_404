@@ -14,7 +14,12 @@ db = get_db()
 
 # Initialize Gemini model
 model = genai.GenerativeModel("gemini-2.0-flash")
-
+questions = [
+        ("interests", "What subjects or activities do you enjoy the most?"),
+        ("strengths", "What are your top 3 strengths or skills?"),
+        ("education", "What is your highest level of education?"),
+        ("preferences", "Do you have any preferences for your future job? (e.g., remote work, good salary, creative role)")
+    ]
 def start_session():
     unique_email = f"user_{uuid.uuid4()}@example.com"
     session = {
@@ -46,17 +51,13 @@ def update_answers(session_id, key, answer):
         {"$set": {f"user_answers.{key}": answer}}
     )
 
-def run_bot():
+def run_bot(email,user_new,questions):
     session_id = start_session()
     
     # Phase 1: Ask questions
-    questions = [
-        ("interests", "What subjects or activities do you enjoy the most?"),
-        ("strengths", "What are your top 3 strengths or skills?"),
-        ("education", "What is your highest level of education?"),
-        ("preferences", "Do you have any preferences for your future job? (e.g., remote work, good salary, creative role)")
-    ]
-    user_new=True
+    collection=db.histories
+    user_doc = collection.find_one({"email": email}, {"_id": 0, "user_answers": 1})
+    
     answers = {}
     if user_new==True:
         for key, question in questions:
@@ -89,12 +90,9 @@ def run_bot():
             print(f"\n Suggestion:\n{suggestion}")
 
     # Phase 3: Follow-up Q&A
-    while True:
+    elif user_new==False and user_doc:
         user_question = input("\nAsk a follow-up (or type 'quit'): ")
-        if user_question.lower() == "quit":
-            print(" Session ended.")
-            break
-
+        answers = user_doc["user_answers"]
         follow_up_prompt = f"Based on the user's profile {answers}, answer this question: {user_question}"
         response = model.generate_content(follow_up_prompt)
         answer = response.text
