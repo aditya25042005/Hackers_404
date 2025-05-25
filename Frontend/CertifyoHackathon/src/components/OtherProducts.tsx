@@ -1,37 +1,41 @@
-import React from 'react';
 
+import React from 'react';
 const products = [
   {
-    name: "AI Resume Builder",
-    description: "Generate professional resumes instantly using AI.",
-    image: "https://imgs.search.brave.com/ItYqGpufFu1VRr5wtLWstJFjUFeKekTQ8_Bd-BUAwCk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vcTZBeFpY/WHp5dHNab0VubnJF/VWN5dFk5NVV2MnEw/ZldBSXdkdXk1SEhy/cy9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlq/Wkc0dS9jSEp2WkM1/M1pXSnphWFJsL0xX/WnBiR1Z6TG1OdmJT/ODIvTXpWak5Ua3hN/emM0TXpNeS9aak00/WW1VeU5XUTBOV1l2/L05qYzBNRGM0WXpK/aE5qazMvT0dObVpU/SmlOVGMzTldZdy9Y/MkZwSlRJd2NtVnpk/VzFsL0pUSXdZblZw/YkdSbGNpVXkvTUdo/bGNtOHVkMlZpY0E"
+    name: "Ditcionary",
+    description: "Get meaning of any word in your mind immediately.",
+    image: "https://imgs.search.brave.com/ItYqGpufFu1VRr5wtLWstJFjUFeKekTQ8_Bd-BUAwCk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vcTZBeFpY/WHp5dHNab0VubnJF/VWN5dFk5NVV2MnEw/ZldBSXdkdXk1SEhy/cy9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlq/Wkc0dS9jSEp2WkM1/M1pXSnphWFJsL0xX/WnBiR1Z6TG1OdmJT/ODIvTXpWak5Ua3hN/emM0TXpNeS9aak00/WW1VeU5XUTBOV1l2/L05qYzBNRGM0WXpK/aE5qazMvT0dObVpU/SmlOVGMzTldZdy9Y/MkZwSlRJd2NtVnpk/VzFsL0pUSXdZblZw/YkdSbGNpVXkvTUdo/bGNtOHVkMlZpY0E",
+    linkto:"https://aditya-gupta23.github.io/Dictionary/"
   },
   {
-    name: "Smart Chatbot",
-    description: "Customizable chatbot trained for your business FAQs.",
-    image: "https://imgs.search.brave.com/8f1acWQD5_7k2gOhGbfXF0Tt4EB69K9uWp2AF3hHDq8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vOWRrMnU2/akVIN1dvczYxUnZs/VVBTRFU2UG9MUEZt/TTliRXpDR2NFeDFl/Zy9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlw/YldjdS9abkpsWlhC/cGF5NWpiMjB2L1pu/SmxaUzEyWldOMGIz/SXYvWTJoaGRDMWli/M1F0WTI5dS9ZMlZ3/ZEMxcGJHeDFjM1J5/L1lYUnBiMjVmTVRF/ME16WXcvTFRVME1U/SXVhbkJuUDNObC9i/WFE5WVdselgyaDVZ/bkpwL1pDWjNQVGMw/TUE"
+    name: "Get My Recipe",
+    description: "Get how to cook your favourite food any time anywhere",
+    image: "https://imgs.search.brave.com/DTLR0l1V-Bnuj_JIqvSgJShUxaIBpS3RO2YeUg1K6Yk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vbWIwaTNB/V1d1UmF1dVJVTS1y/aWFDd19SSmRubjNY/Y2s1S1BqX2t4YWNB/ay9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlw/YldjdS9abkpsWlhC/cGF5NWpiMjB2L1pu/SmxaUzF3YUc5MGJ5/OWkvZFdSa2FHRXRZ/bTkzYkMxay9hWE5v/TFhkcGRHZ3RkbVZu/L1pYUmhZbXhsY3kx/c1pXZDEvYldWekxY/UnZjQzEyYVdWMy9Y/ekV4TlRBdE5ESTFP/VEV1L2FuQm5QM05s/YlhROVlXbHovWDJo/NVluSnBaQ1ozUFRj/MC9NQQ",
+    linkto:"https://aditya-gupta23.github.io/Get-My-Recipe/"
   },
   {
-    name: "Image Captioning Tool",
-    description: "AI tool that generates captions for images using deep learning.",
-    image: "https://imgs.search.brave.com/WMRky7MXVsdn3NkaPMkUtRBe9pwPc_Dkrykz7QfVcA4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vdkdsUXJM/NW1wV0lZREVxWG5r/SWFFSDBMMjJ3MlpK/Q0djRURJOGx3U2NY/VS9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTlo/WkdGei9ZMmt1YjNK/bkwzZHdMV052L2Ju/UmxiblF2ZFhCc2Iy/RmsvY3k4eU1ESTBM/ekExTDJsdC9ZV2Rs/TFdOaGNIUnBiMjVw/L2JtY3RNVEF5Tkhn/MU56WXUvY0c1bg"
+    name: "Currency Convertor",
+    description: "Planing to travel abroad now worries we are here to help you konw the rates",
+    image: "https://imgs.search.brave.com/jtjAVHRDcjIi71nOQB9NKoGzBbNBlb9KJ6WvkLcwLHA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vY2FZREhM/YllWZE9GakF1aDZD/UTZhNHI4RmRpSHdl/amFNYl9lZ3dLdV9o/Yy9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTl6/ZEdGMC9hV011ZG1W/amRHVmxlbmt1L1ky/OXRMM041YzNSbGJT/OXkvWlhOdmRYSmpa/WE12ZEdoMS9iV0p1/WVdsc2N5OHdNRFV2/L05EUTVMelkwTmk5/emJXRnMvYkM5amRY/SnlaVzVqZVMxbC9l/R05vWVc1blpTMXZj/aTF0L2IyNWxlUzFr/YjJ4c1lYSXQvWVc1/a0xXVjFjbTh0WjI5/cy9aR1Z1TFhKdmRX/NWtMV04xL2NuSmxi/bU41TFdOdmFXNXov/TFhabFkzUnZjaTVx/Y0dj",
+    linkto:"https://github.com/Aditya-Gupta23/Currency-Concerter.git"
   },
-  {
-    name: "Text Summarizer",
-    description: "Summarize large documents into short paragraphs.",
-    image: "https://imgs.search.brave.com/hSoFF0qUj9e_bLAdmNmOB6WOHtU1GvN24DduwxHPIgY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWdz/LnNlYXJjaC5icmF2/ZS5jb20vQ3FQSnBo/clhOMDFoSXRrMVd6/VFE5NXR5eHJ5U2V4/SUVhbHNvRVBsM2RL/by9yczpmaXQ6NTAw/OjA6MDowL2c6Y2Uv/YUhSMGNITTZMeTl3/WVhKaC9abkpoYzJs/emRDNWpiMjB2L1gz/WmxjbU5sYkM5cGJX/Rm4vWlQ5MWNtdzlM/Mmx0WVdkbC9jeTl6/ZFcxdFlYSnBlbVZ5/L0wzUnZiMnd0Wlc0/dWQyVmkvY0NaM1BU/RXdNalFtY1QwNC9N/QQ"
-  }
+  
 ];
 
 const PreviousProducts: React.FC = () => {
+
+
   return (
     <div className=" py-12 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-8">Our Previous Products</h2>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div  className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product, index) => (
-            <div
+            <a
+              target="_blank"
               key={index}
+              href={product.linkto}
+              rel="noopener noreferrer"
               className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition"
             >
               <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
@@ -39,7 +43,7 @@ const PreviousProducts: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900">{product.name}</h3>
                 <p className="text-sm text-gray-600 mt-2">{product.description}</p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

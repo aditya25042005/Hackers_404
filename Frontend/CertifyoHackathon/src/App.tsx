@@ -5,6 +5,8 @@ import './App.css'
 import Register from './components/Register'
 import About from './components/About'
 import Contacts from './components/Contacts'
+// import UseAiCouncellor from './components/UseAiCouncellor'
+import BotChat from './components/BotChat'
 
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contacts/>}/>
-        <Route path='/usecouncellor' element={<Contacts/>}/>
+        <Route path='/botchat' element={<BotChat/>}/>
       </Routes>
     </Router>
     </>
