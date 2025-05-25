@@ -21,7 +21,8 @@ try{
     const { email, message,questions={} } = req.body;
     let news =true;
 
-if(questions.length===0){
+console.log(questions.length);
+if(!questions.length){
     news=false;
 }
 //console.log(result);
