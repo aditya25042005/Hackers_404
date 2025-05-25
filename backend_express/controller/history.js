@@ -1,5 +1,5 @@
 import History from '../models/history.js';
-
+import axios from 'axios';
 
 
 import joi from 'joi';
@@ -12,7 +12,7 @@ try{
         message: joi.string().required(),
         //question:joi.array().items(joi.string()).required(),
         
-    });
+    }).unknown(true);
   
     const { error } = schema.validate(req.body);
     if (error) {
@@ -24,7 +24,7 @@ try{
 if(questions.length===0){
     news=false;
 }
-console.log(result);
+//console.log(result);
 
     try {
     // Replace with the API you want to call
