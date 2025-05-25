@@ -1,3 +1,5 @@
 pymongo 
 langchain-groq 
 python-dotenv
+google-generative-ai
+uuid
