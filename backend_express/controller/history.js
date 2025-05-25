@@ -12,13 +12,30 @@ try{
         message: joi.string().required(),
         
     });
-
+  
     const { error } = schema.validate(req.body);
     if (error) {
         return res.status(400).json({ message: error.message });
     }
     const { email, message,id } = req.body;
+    const newChatMessage = {
+  from: 'user',
+  text: message
+  // no time here, it will be auto-added by Mongoose
+};
+
+
+
      // email=req.user
+
+     //send to mongo db req of user
+
+     const result = await History.updateOne(
+  { email: email },
+  { $push: { chat_history: newChatMessage } }
+);
+
+console.log(result);
 
     try {
     // Replace with the API you want to call
