@@ -27,8 +27,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
                 if (res.data.email) {
                     setUser({ email: res.data.email });
                 }
-            } catch (err) {
-                console.log("Error fetching user:", err);
+            } catch  {
+                console.log("User not logged in yet.");
             }
         };
 

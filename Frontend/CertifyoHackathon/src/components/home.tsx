@@ -14,9 +14,9 @@ const Home: React.FC = () => {
   const {user}=useUser()
   const handleUse = () => {
     if(user){
-      navigate('/usecouncellor')
+      navigate('/botchat')
     }else{
-      navigate('login')
+      navigate('/login')
     }
   }
 

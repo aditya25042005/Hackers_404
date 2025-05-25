@@ -8,6 +8,7 @@ interface Message {
   time?: string;
   _id?: string;
 }
+
 const defaultQuestions = [
   { from: "bot", text: "What subjects or activities do you enjoy the most?" },
   { from: "bot", text: "What are your top 3 strengths or skills?" },
@@ -19,80 +20,70 @@ const defaultQuestions = [
   },
 ];
 
-
 const BotChat: React.FC = () => {
-
-  const [messages, setMessages] = useState<Message[]>([])
+  const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
-
-const email = useUser().user?.email;
-
+  const email = useUser().user?.email;
   const [initialResponses, setInitialResponses] = useState<string[]>([]);
   const [isNewUser, setIsNewUser] = useState(false);
 
+  // 🔁 Load history from backend
+  const fetchHistory = async () => {
+    try {
+      const res = await axios.post("http://localhost:8000/history/loadhistory", {
+        email,
+      });
 
-  useEffect(() => {
-    axios
-      .post("http://localhost:8000/history/loadhistory", {
-        email: email,
-      })
-      .then((res) => {
-        console.log("API Response:", res.data);
+      const history = res.data.history;
 
-        const history = res.data.history;
+      if (Array.isArray(history) && history.length > 0) {
+        const validHistory = history.filter(
+          (msg) => msg && msg.text && msg.from
+        );
 
-        if (Array.isArray(history) && history.length > 0) 
-          {
-          const validHistory = history.filter(
-            (msg) => msg && msg.text && msg.from
-          );
-
-          if (validHistory.length > 0) {
-            console.log("Valid history being set");
-            setMessages(validHistory);
-          } else {
-            console.log("History exists but contains no valid messages");
-            setMessages(defaultQuestions);
-            setIsNewUser(true);
-          }
+        if (validHistory.length > 0) {
+          setMessages(validHistory);
         } else {
-          console.log("No history array or empty");
           setMessages(defaultQuestions);
           setIsNewUser(true);
         }
-      })
-      .catch((err) => {
-        console.error("Error loading history:", err);
+      } else {
         setMessages(defaultQuestions);
         setIsNewUser(true);
-      });
-  }, []);
-
-  const handleSend = async () => {
-  if (!newMessage.trim()) return;
-
-  const userMsg: Message = { from: "user", text: newMessage };
-  setMessages((prev) => [...prev, userMsg]);
-
-  // Declare once
-  const sendPayload: {
-    email: string | undefined;
-    message: string;
-    questions?: { [key: string]: string }[];
-  } = {
-    email,
-    message: newMessage,
+      }
+    } catch (err) {
+      console.error("Error loading history:", err);
+      setMessages(defaultQuestions);
+      setIsNewUser(true);
+    }
   };
 
-  const updatedResponses = [...initialResponses];
+  // Load chat when component mounts or email changes
+  useEffect(() => {
+    if (email) fetchHistory();
+  }, [email]);
 
-  // Track first 4 responses if new user
-  if (isNewUser && updatedResponses.length < 4) {
-    updatedResponses.push(newMessage);
+  const handleSend = async () => {
+    if (!newMessage.trim()) return;
+
+    const userMsg: Message = { from: "user", text: newMessage };
+    setMessages((prev) => [...prev, userMsg]);
+
+    const updatedResponses = [...initialResponses, newMessage];
     setInitialResponses(updatedResponses);
 
-    if (updatedResponses.length === 4) {
-      // Add 'questions' field to the existing object
+    const sendPayload: {
+      email: string | undefined;
+      message: string;
+      questions?: { [key: string]: string }[];
+      user_new?: boolean;
+    } = {
+      email,
+      message: newMessage,
+      user_new: isNewUser,
+    };
+
+    if (isNewUser && updatedResponses.length === 4) {
       sendPayload.questions = [
         { interests: updatedResponses[0] },
         { strengths: updatedResponses[1] },
@@ -100,103 +91,46 @@ const email = useUser().user?.email;
         { preferences: updatedResponses[3] },
       ];
     }
-  }
 
-  try {
-    const response = await axios.post("http://localhost:8000/history/sendhistory", sendPayload);
+    if (isNewUser && updatedResponses.length < 4) {
+      setNewMessage("");
+      return;
+    }
 
-    if (response.data && response.data.reply) {
-      const botMsg: Message = { from: "bot", text: response.data.reply };
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/history/sendhistory",
+        sendPayload
+      );
+
+      console.log("✅ Bot response received:", response.data);
+
+      // 🔁 Instead of manually setting message, refetch all from backend
+      await fetchHistory();
+
+      if (isNewUser && updatedResponses.length === 4) {
+        setIsNewUser(false);
+        setInitialResponses([]);
+      }
+    } catch (err) {
+      console.error("❌ Failed to send message or receive reply:", err);
+      const botMsg: Message = {
+        from: "bot",
+        text: "Sorry, something went wrong. Please try again.",
+      };
       setMessages((prev) => [...prev, botMsg]);
     }
-  } catch (err) {
-    console.error("Failed to send message or receive reply:", err);
-  }
 
-  setNewMessage("");
-};
-
-
-
-
-  // const handleSend = async () => {
-  //   if (!newMessage.trim()) return;
-  //   const userMsg: Message = { from: "user", text: newMessage }
-  //   setMessages((prev) => [...prev, userMsg]);
-  //   try {
-  //     await axios.post("http://localhost:8000/history/sendhistory", {
-  //       email: email,
-  //       message: newMessage,
-  //     });
-  //   } catch (err) {
-  //     console.error("Failed to send message to server:", err);
-  //   }
-  //   setNewMessage("");
-  // }
-
-//   const handleSend = async () => {
-//   if (!newMessage.trim()) return;
-
-//   const userMsg: Message = { from: "user", text: newMessage };
-//   setMessages((prev) => [...prev, userMsg]);
-
-
-//   if (isNewUser && initialResponses.length < 4) {
-//     const updatedResponses = [...initialResponses, newMessage];
-//     setInitialResponses(updatedResponses);
-
-
-//     if (updatedResponses.length === 4) {
-//       const structuredQuestions = [
-//         { interests: updatedResponses[0] },
-//         { strengths: updatedResponses[1] },
-//         { education: updatedResponses[2] },
-//         { preferences: updatedResponses[3] },
-//       ];
-
-//       try {
-//         await axios.post("http://localhost:8000/history/sendhistory", {
-//           email,
-//           message: newMessage,
-//           questions: structuredQuestions,
-//         });
-//         console.log(" Sent 4 structured answers");
-//       } catch (err) {
-//         console.error("Failed to send structured answers:", err);
-//       }
-//     } else {
-//       // Less than 4 responses: still send message without questions array
-//       try {
-//         await axios.post("http://localhost:8000/history/sendhistory", {
-//           email,
-//           message: newMessage,
-//         });
-//       } catch (err) {
-//         console.error("Failed to send partial message:", err);
-//       }
-//     }
-//   } else {
-//     // Old user or past initial 4 messages
-//     try {
-//       await axios.post("http://localhost:8000/history/sendhistory", {
-//         email,
-//         message: newMessage,
-//       });
-//     } catch (err) {
-//       console.error("Failed to send message:", err);
-//     }
-//   }
-
-//   setNewMessage("");
-// };
-
-
+    setNewMessage("");
+  };
 
   return (
     <div>
       <div className="border rounded-lg overflow-hidden m-4 shadow-lg">
-        <div className="sticky top-0 z-50  border-b  border-gray-300 bg-white py-5 px-8 text-left text-sm  text-gray-800">
-          <h4 className=" inline-block py-1 text-left font-sans font-semibold normal-case">Career Guidance Bot</h4>
+        <div className="sticky top-0 z-50 border-b border-gray-300 bg-white py-5 px-8 text-left text-sm text-gray-800">
+          <h4 className="inline-block py-1 text-left font-sans font-semibold normal-case">
+            Career Guidance Bot
+          </h4>
         </div>
 
         <div className="flex-grow px-8 pt-8 text-left text-gray-700">
@@ -204,14 +138,16 @@ const email = useUser().user?.email;
             msg && msg.text && msg.from ? (
               <div
                 key={idx}
-                className={`relative mb-6 text-left flex ${msg.from === "user" ? "justify-end" : "justify-start"
-                  }`}
+                className={`relative mb-6 text-left flex ${
+                  msg.from === "user" ? "justify-end" : "justify-start"
+                }`}
               >
                 <div
-                  className={`inline-block rounded-md py-3 px-4 text-sm ${msg.from === "user"
+                  className={`inline-block rounded-md py-3 px-4 text-sm ${
+                    msg.from === "user"
                       ? "bg-blue-700 text-white"
                       : "bg-gray-200 text-gray-800"
-                    }`}
+                  }`}
                 >
                   {msg.text}
                 </div>
@@ -235,10 +171,9 @@ const email = useUser().user?.email;
             </button>
           </div>
         </div>
-
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BotChat
+export default BotChat;
