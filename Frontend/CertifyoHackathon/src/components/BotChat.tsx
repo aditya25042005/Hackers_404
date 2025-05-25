@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useUser } from "../context/UserContext";
 
 interface Message {
   from: string;
@@ -18,12 +19,13 @@ const defaultQuestions = [
   },
 ];
 
+
 const BotChat: React.FC = () => {
 
   const [messages, setMessages] = useState<Message[]>([])
   const [newMessage, setNewMessage] = useState("");
 
-  const email = "adityagupta@gmail.com";
+const email = useUser().user?.email;
 
   const [initialResponses, setInitialResponses] = useState<string[]>([]);
   const [isNewUser, setIsNewUser] = useState(false);
@@ -66,6 +68,56 @@ const BotChat: React.FC = () => {
       });
   }, []);
 
+  const handleSend = async () => {
+  if (!newMessage.trim()) return;
+
+  const userMsg: Message = { from: "user", text: newMessage };
+  setMessages((prev) => [...prev, userMsg]);
+
+  // Declare once
+  const sendPayload: {
+    email: string | undefined;
+    message: string;
+    questions?: { [key: string]: string }[];
+  } = {
+    email,
+    message: newMessage,
+  };
+
+  const updatedResponses = [...initialResponses];
+
+  // Track first 4 responses if new user
+  if (isNewUser && updatedResponses.length < 4) {
+    updatedResponses.push(newMessage);
+    setInitialResponses(updatedResponses);
+
+    if (updatedResponses.length === 4) {
+      // Add 'questions' field to the existing object
+      sendPayload.questions = [
+        { interests: updatedResponses[0] },
+        { strengths: updatedResponses[1] },
+        { education: updatedResponses[2] },
+        { preferences: updatedResponses[3] },
+      ];
+    }
+  }
+
+  try {
+    const response = await axios.post("http://localhost:8000/history/sendhistory", sendPayload);
+
+    if (response.data && response.data.reply) {
+      const botMsg: Message = { from: "bot", text: response.data.reply };
+      setMessages((prev) => [...prev, botMsg]);
+    }
+  } catch (err) {
+    console.error("Failed to send message or receive reply:", err);
+  }
+
+  setNewMessage("");
+};
+
+
+
 
   // const handleSend = async () => {
   //   if (!newMessage.trim()) return;
@@ -82,87 +134,61 @@ const BotChat: React.FC = () => {
   //   setNewMessage("");
   // }
 
-  const handleSend = async () => {
-  if (!newMessage.trim()) return;
+//   const handleSend = async () => {
+//   if (!newMessage.trim()) return;
 
-  const userMsg: Message = { from: "user", text: newMessage };
-  setMessages((prev) => [...prev, userMsg]);
-
-  // Track first 4 responses if new user
-  if (isNewUser && initialResponses.length < 4) {
-    const updatedResponses = [...initialResponses, newMessage];
-    setInitialResponses(updatedResponses);
-
-    // If we've collected 4 responses, send them as structured data
-    if (updatedResponses.length === 4) {
-      const structuredQuestions = [
-        { interests: updatedResponses[0] },
-        { strengths: updatedResponses[1] },
-        { education: updatedResponses[2] },
-        { preferences: updatedResponses[3] },
-      ];
-
-      try {
-        await axios.post("http://localhost:8000/history/sendhistory", {
-          email,
-          message: newMessage,
-          questions: structuredQuestions,
-        });
-        console.log("📤 Sent 4 structured answers");
-      } catch (err) {
-        console.error("❌ Failed to send structured answers:", err);
-      }
-    } else {
-      // Less than 4 responses: still send message without questions array
-      try {
-        await axios.post("http://localhost:8000/history/sendhistory", {
-          email,
-          message: newMessage,
-        });
-      } catch (err) {
-        console.error("Failed to send partial message:", err);
-      }
-    }
-  } else {
-    // Old user or past initial 4 messages
-    try {
-      await axios.post("http://localhost:8000/history/sendhistory", {
-        email,
-        message: newMessage,
-      });
-    } catch (err) {
-      console.error("Failed to send message:", err);
-    }
-  }
-
-  setNewMessage("");
-};
+//   const userMsg: Message = { from: "user", text: newMessage };
+//   setMessages((prev) => [...prev, userMsg]);
 
 
-  //   const handleSend = () => {
-  //   if (!newMessage.trim()) return;
+//   if (isNewUser && initialResponses.length < 4) {
+//     const updatedResponses = [...initialResponses, newMessage];
+//     setInitialResponses(updatedResponses);
 
-  //   const userMsg: Message = { from: "user", text: newMessage };
-  //   setMessages((prev) => [...prev, userMsg]);
 
-  //   // Send to backend
-  //   axios.post("http://localhost:8000/history/sendhistory", {
-  //     email: "user@example.com",
-  //     message: newMessage,
-  //     questions: [
-  //       { interests: "Programming, AI" },
-  //       { strengths: "Problem solving, Communication" },
-  //       { education: "Bachelor of Science in Computer Science" },
-  //       { preferences: "remote" }
-  //     ]
-  //   }).then((res) => {
-  //     console.log("✅ Message sent:", res.data);
-  //   }).catch((err) => {
-  //     console.error("❌ Error sending:", err.response?.data || err.message);
-  //   });
+//     if (updatedResponses.length === 4) {
+//       const structuredQuestions = [
+//         { interests: updatedResponses[0] },
+//         { strengths: updatedResponses[1] },
+//         { education: updatedResponses[2] },
+//         { preferences: updatedResponses[3] },
+//       ];
 
-  //   setNewMessage("");
-  // };
+//       try {
+//         await axios.post("http://localhost:8000/history/sendhistory", {
+//           email,
+//           message: newMessage,
+//           questions: structuredQuestions,
+//         });
+//         console.log(" Sent 4 structured answers");
+//       } catch (err) {
+//         console.error("Failed to send structured answers:", err);
+//       }
+//     } else {
+//       // Less than 4 responses: still send message without questions array
+//       try {
+//         await axios.post("http://localhost:8000/history/sendhistory", {
+//           email,
+//           message: newMessage,
+//         });
+//       } catch (err) {
+//         console.error("Failed to send partial message:", err);
+//       }
+//     }
+//   } else {
+//     // Old user or past initial 4 messages
+//     try {
+//       await axios.post("http://localhost:8000/history/sendhistory", {
+//         email,
+//         message: newMessage,
+//       });
+//     } catch (err) {
+//       console.error("Failed to send message:", err);
+//     }
+//   }
+
+//   setNewMessage("");
+// };
 
 
 

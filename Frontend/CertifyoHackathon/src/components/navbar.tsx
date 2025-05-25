@@ -3,15 +3,24 @@ import '../static/navbar.css'
 import logo from './cropped_image.png'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { useUser } from '../context/UserContext'
+import axios from 'axios'
 
 const Navbar: React.FC = () => {
 
   const navigate = useNavigate()
     const { user, setUser } = useUser()
 
-    const handleLogout=()=>{
+    const handleLogout=async()=>{
+      try{
+        await axios.get("http://localhost:8000/user/logout",{
+          withCredentials:true
+        });
       setUser(null)
       navigate('/login')
+      }catch(err){
+        console.log(err)
+      }
+      
     }
 
   const [isMobile, setIsMobile] = useState(false)
