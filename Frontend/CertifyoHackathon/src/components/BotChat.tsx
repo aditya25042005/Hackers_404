@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../context/UserContext";
+import '../static/Botchat.css'
 
 interface Message {
   from: string;
@@ -10,6 +11,7 @@ interface Message {
 }
 
 const defaultQuestions = [
+  { from: "bot", text: "<h2>Please answer All questions individually</h2>" },
   { from: "bot", text: "What subjects or activities do you enjoy the most?" },
   { from: "bot", text: "What are your top 3 strengths or skills?" },
   { from: "bot", text: "What is your highest level of education?" },
@@ -20,12 +22,27 @@ const defaultQuestions = [
   },
 ];
 
+
+
+
 const BotChat: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const email = useUser().user?.email;
   const [initialResponses, setInitialResponses] = useState<string[]>([]);
   const [isNewUser, setIsNewUser] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const messagesEndRef = React.useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+  messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+};
+useEffect(() => {
+  scrollToBottom();
+}, [messages]);
+
+
 
   // 🔁 Load history from backend
   const fetchHistory = async () => {
@@ -68,6 +85,7 @@ const BotChat: React.FC = () => {
 
     const userMsg: Message = { from: "user", text: newMessage };
     setMessages((prev) => [...prev, userMsg]);
+    setLoading(true);
 
     const updatedResponses = [...initialResponses, newMessage];
     setInitialResponses(updatedResponses);
@@ -94,6 +112,7 @@ const BotChat: React.FC = () => {
 
     if (isNewUser && updatedResponses.length < 4) {
       setNewMessage("");
+      setLoading(false);
       return;
     }
 
@@ -122,6 +141,7 @@ const BotChat: React.FC = () => {
     }
 
     setNewMessage("");
+    setLoading(false);
   };
 
   return (
@@ -138,22 +158,35 @@ const BotChat: React.FC = () => {
             msg && msg.text && msg.from ? (
               <div
                 key={idx}
-                className={`relative mb-6 text-left flex ${
-                  msg.from === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
-                <div
-                  className={`inline-block rounded-md py-3 px-4 text-sm ${
-                    msg.from === "user"
-                      ? "bg-blue-700 text-white"
-                      : "bg-gray-200 text-gray-800"
+                className={`relative mb-6 text-left flex ${msg.from === "user" ? "justify-end" : "justify-start"
                   }`}
+              >
+                <div id="chatbor-response"
+                  className={` inline-block rounded-md py-3 px-4 text-sm ${msg.from === "user"
+                    ? "bg-blue-700 text-white"
+                    : "bg-gray-200 text-gray-800 prose prose-sm sm:prose lg:prose-lg"
+                    }`}
                 >
-                  {msg.text}
+                  {/* {msg.text} */}
+                  {msg.from === "bot" ? (
+                    <span dangerouslySetInnerHTML={{ __html: msg.text }} />
+                  ) : (
+                    msg.text
+                  )}
+
                 </div>
+                <>{console.log(messages)}</>
               </div>
             ) : null
           )}
+          {loading && (
+            <div className="mb-4 text-left">
+              <div className="inline-block rounded-md py-2 px-4 bg-gray-100 text-gray-600 text-sm animate-pulse">
+                Bot is typing...
+              </div>
+            </div>
+          )}
+            <div ref={messagesEndRef} />
 
           <div className="mt-4 flex items-start border-t border-gray-300 sm:p-8 py-4 text-left text-gray-700">
             <textarea
