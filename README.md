@@ -38,22 +38,23 @@ This is a Python-based chatbot that provides career advice based on user input. 
 ```bash
 git clone https://github.com/aditya25042005/Hackers_404.git
 cd hackers_404
-
+'''
 ### 🖥️ 2. Frontend (React)
 ```bash
 
 cd frontend/CertifoHackathon
 npm install
 npm run dev
-
+'''
 ###  🌐3.  Backend (Express.js)
-
+'''bash
 cd backend_express
 npm install
 npm run dev
-
+'''
 ###  🧠 4. AI Backend (Flask + Gemini)
-
+'''bash
 cd flask
 pip install -r req.txt
 python app.py
+'''
