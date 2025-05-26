@@ -23,6 +23,7 @@ const Login: React.FC = () => {
                 }
             )
             if (res.data.message == "user found") {
+                localStorage.setItem("userEmail", email); // cache in localStorage
                 setUser({ email });
                 navigate("/");
             } else {

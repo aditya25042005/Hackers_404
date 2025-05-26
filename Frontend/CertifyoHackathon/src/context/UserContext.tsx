@@ -26,12 +26,16 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
                 });
                 if (res.data.email) {
                     setUser({ email: res.data.email });
+                    localStorage.setItem("userEmail", res.data.email); // cache in localStorage
                 }
-            } catch  {
-                console.log("User not logged in yet.");
+            } catch {
+                console.log("User not logged in with cookies. Trying localStorage...");
+                const savedEmail = localStorage.getItem("userEmail");
+                if (savedEmail) {
+                    setUser({ email: savedEmail });
+                }
             }
         };
-
         fetchUser();
     }, []);
 
