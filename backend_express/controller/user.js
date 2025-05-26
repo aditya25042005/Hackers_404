@@ -149,7 +149,8 @@ const token=jwt.sign({id:user._id,email:user.email},"aditya",{expiresIn:"1d"})
 console.log(token)
 res.cookie('token', token, {
   httpOnly: true,
-  sameSite: 'None',
+    sameSite: 'None',
+
   secure: true,  // always send cookie only over HTTPS
   maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
 });
