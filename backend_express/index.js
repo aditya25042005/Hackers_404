@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import userrouter from './router/user_router.js'
 import historyrouter from './router/history.js'
-
+import {auth} from './middlewares/auth.js'
 mongoose.connect(process.env.MONGO_URI).then(()=>{
 
 console.log("connected to database")
