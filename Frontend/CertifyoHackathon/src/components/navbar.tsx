@@ -43,6 +43,10 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  const handleChange=(e:React.ChangeEvent<HTMLSelectElement>)=>{
+    navigate(`/${e.target.value}`)
+  }
+
   return (
     <>
     <div className="navbar">
@@ -51,7 +55,7 @@ const Navbar: React.FC = () => {
       </div>
       <div className='basic'>
         {isMobile ? (
-          <select className="bg-black text-white border border-white px-2 py-1 rounded appearance-none">
+          <select  onChange={handleChange} className="bg-black text-white border border-white px-2 py-1 rounded appearance-none">
             <option disabled selected value="More">More</option>
             <option value="about">About</option>
             <option value="contact">Contact</option>
