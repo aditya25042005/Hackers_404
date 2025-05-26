@@ -78,7 +78,7 @@ const Login: React.FC = () => {
                     <div className="absolute bottom-0 z-10 px-8 text-white opacity-100">
                         <p className="mb-12 text-4xl font-semibold leading-10">#one<span className="text-red-600">Code</span> welcomes you to AI Career Counselor Bot</p>
                         <p className="mb-4 text-2xl font-semibold">Team Lead : Ansh Singh</p>
-                        <p className="text-xl">Members : Aditya Gupta , Aditya Karn ,Srishtik Sekar</p>
+                        <p className="text-xl">Members : Aditya Gupta , Aditya Karn ,G Srishtik Sekar</p>
                         <p className="mb-7 text-1xl opacity-70"></p>
                     </div>
                     {/* <img className="-z-1 absolute top-0 h-full w-full object-cover opacity-90" src="https://images.unsplash.com/photo-1565301660306-29e08751cc53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" /> */}
