@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import userrouter from './router/user_router.js'
 import historyrouter from './router/history.js'
-
+import {auth} from './middlewares/auth.js'
 mongoose.connect(process.env.MONGO_URI).then(()=>{
 
 console.log("connected to database")
@@ -35,7 +35,7 @@ app.use(express.json(),cookieParser());          // parse JSON bodies
 
 
 app.use('/user', userrouter);
-app.use('/history', historyrouter);
+app.use('/history',auth, historyrouter);
 
 
 

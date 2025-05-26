@@ -1,5 +1,6 @@
 import Router from "express";
 import {createUser,loginuser,verifyotp,give_email,logout } from "../controller/user.js";
+
 const router = Router();
 router.post("/createuser/otp",verifyotp);
 
