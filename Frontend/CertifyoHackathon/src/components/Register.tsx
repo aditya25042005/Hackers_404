@@ -20,7 +20,7 @@ const Register:React.FC = () => {
 
         try{
             if(!otpSent){
-                await axios.post("http://localhost:8000/user/createuser",{
+                await axios.post("https://hackers-404-5.onrender.com/user/createuser",{
                     name,
                     email,
                     password,
@@ -30,7 +30,7 @@ const Register:React.FC = () => {
             }
             else
             {
-                await axios.post("http://localhost:8000/user/createuser/otp", {
+                await axios.post("https://hackers-404-5.onrender.com/user/createuser/otp", {
                     name,
                     email,
                     password,
@@ -39,7 +39,7 @@ const Register:React.FC = () => {
                 navigate('/login')
             }
         }catch (err) {
-            alert(`${err}`);
+            alert(`your account already exists ${err}`);
         } finally {
             setLoading(false);
         }
@@ -98,7 +98,7 @@ const Register:React.FC = () => {
                     <div className="absolute bottom-0 z-10 px-8 text-white opacity-100">
                         <p className="mb-12 text-4xl font-semibold leading-10">#one<span className="text-red-600">Code</span> welcomes you to AI Career Counselor Bot</p>
                         <p className="mb-4 text-2xl font-semibold">Team Lead : Ansh Singh</p>
-                        <p className="text-xl">Members : Aditya Gupta , Aditya Karn ,Sristik</p>
+                        <p className="text-xl">Members : Srishtik Sekar, Aditya Gupta , Aditya Karn </p>
                         <p className="mb-7 text-1xl opacity-70"></p>
                     </div>
                     {/* <img className="-z-1 absolute top-0 h-full w-full object-cover opacity-90" src="https://images.unsplash.com/photo-1565301660306-29e08751cc53?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" /> */}
