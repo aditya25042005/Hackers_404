@@ -74,7 +74,7 @@ const Register:React.FC = () => {
                             </div>
                             <div className="flex flex-col pt-4">
                                 <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                                    <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" id="login-password" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Password" />
+                                    <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" id="login-password" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Set your Password" />
                                 </div>
                             </div>
                             <div className="mb-12 flex flex-col pt-4">
