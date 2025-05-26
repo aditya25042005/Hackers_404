@@ -52,7 +52,7 @@ const About: React.FC = () => {
               <p>Works on training, optimizing, and deploying AI models.</p>
             </div>
           </div>
-          <div id='students'>We are the Sutdents of Indian Institute of Technology Kottayam </div>
+          <div id='students'>We are the Students of Indian Institute of  Information Technology Kottayam </div>
         </div>
       </div>
       <Footer />
