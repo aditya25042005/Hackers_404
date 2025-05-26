@@ -119,7 +119,7 @@ useEffect(() => {
     try {
       const response = await axios.post(
         "https://hackers-404-5.onrender.com/history/sendhistory",
-        {withCredentials:true,
+        {
         sendPayload}
       );
 

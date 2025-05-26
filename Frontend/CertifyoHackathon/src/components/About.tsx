@@ -3,7 +3,8 @@ import Navbar from './navbar';
 import Footer from './Footer';
 import Ag from './Ag.jpeg'
 import Ak from './Ak.jpeg'
-import As from './As.jpg'
+import As from './As.jpeg'
+import ss from './ss.jpeg'
 import '../static/about.css'; // Make sure to create this file
 
 const About: React.FC = () => {
@@ -44,9 +45,9 @@ const About: React.FC = () => {
             </div>
             <div className="team-card">
               <div>
-                {/* <img src={logo} alt="" /> */}
+                <img src={ss} alt="" />
               </div>
-              <h2>Srishtik Sekar</h2>
+              <h2>G Srishtik Sekar</h2>
               <p className="role">ML Developer</p>
               <p>Works on training, optimizing, and deploying AI models.</p>
             </div>
