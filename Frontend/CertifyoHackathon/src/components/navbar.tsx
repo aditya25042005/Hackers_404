@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
             Contact
           </NavLink>
         </>)
-        }
+        }npm
       </div>
       <div className='btns'>
        { user?(
