@@ -54,8 +54,8 @@ const Testimonial:React.FC = () => {
 
             <div className="-mx-5 mt-8 px-8 py-1">
               <div className="">
-                <p className="text-base font-bold">Srijan Khare</p>
-                <p className="text-blue-90 mt-0.5 text-sm">Student at IIM indore</p>
+                <p className="text-base font-bold">Sahil Prakesh</p>
+                <p className="text-blue-90 mt-0.5 text-sm">Student at NIT Silchar</p>
               </div>
             </div>
           </div>
@@ -67,7 +67,7 @@ const Testimonial:React.FC = () => {
               <p className="border-blue-500 px-10 text-xl font-black">Saved me 1000s of hours</p>
 
               <blockquote className="mt-8 flex-1">
-                <p className="leading-relaxed text-blue-900">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium dolores facere repellendus, velit quis fugiat.</p>
+                <p className="leading-relaxed text-blue-900">In my childhood i wanted to be a doctor but when i grew up i got confused now I am doing engineering thanks to this product. They guided me to go in correct stream .</p>
               </blockquote>
             </div>
 
@@ -91,55 +91,3 @@ const Testimonial:React.FC = () => {
 
 export default Testimonial
 
-// import React from 'react';
-// import '../static/testimonial.css';
-
-// const Testimonial: React.FC = () => {
-//   return (
-//     <div className="testimonial-section">
-//       <h2 className="testimonial-title">What Our Clients Say</h2>
-//       <div className="testimonial-grid">
-//         <div className="testimonial-card">
-//           <p className="testimonial-message">
-//             “Incredible tools! Their AI summarizer has saved me hours every week. Totally recommend it.”
-//           </p>
-//           <div className="testimonial-user">
-//             <img src="https://via.placeholder.com/50" alt="User" className="user-avatar" />
-//             <div>
-//               <p className="user-name">Rohan Mehta</p>
-//               <p className="user-role">Data Analyst, ZenithCorp</p>
-//             </div>
-//           </div>
-//         </div>
-
-//         <div className="testimonial-card">
-//           <p className="testimonial-message">
-//             “The team is super responsive and their chatbot solution fits perfectly into our CRM workflow.”
-//           </p>
-//           <div className="testimonial-user">
-//             <img src="https://via.placeholder.com/50" alt="User" className="user-avatar" />
-//             <div>
-//               <p className="user-name">Neha Verma</p>
-//               <p className="user-role">CRM Lead, FinTechX</p>
-//             </div>
-//           </div>
-//         </div>
-
-//         <div className="testimonial-card">
-//           <p className="testimonial-message">
-//             “Impressed by the precision of their ML models. Our fraud detection rate has significantly improved.”
-//           </p>
-//           <div className="testimonial-user">
-//             <img src="https://via.placeholder.com/50" alt="User" className="user-avatar" />
-//             <div>
-//               <p className="user-name">Amit Kaul</p>
-//               <p className="user-role">Security Engineer, SafeBank</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Testimonial;
