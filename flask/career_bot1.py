@@ -64,7 +64,7 @@ def run_bot(email,user_new,message,questions):
     if user_new==True:
         session_id = start_session(email)
         for qdict in questions: 
-         for key, question in qdict.items():
+          for key, question in qdict.items():
  
             add_message(session_id, "bot", key)
             print(f" {question}")
@@ -74,7 +74,7 @@ def run_bot(email,user_new,message,questions):
             update_answers(session_id, key, answer)
 
             # Phase 2: Career Suggestion
-            prompt = f"""
+        prompt = f"""
 You are a professional career counselor.
 
 Based on this user profile:
@@ -99,10 +99,10 @@ https://resource4.com
 Only include URLs for resources, no extra text in the resources sections.give answer in hypertext format html so frontend can just render it ,remove all stars,don't add css just html tags ,directly start from content inside body  remove body tag ,directly start from content inside body
 Begin now:
 """
-            response = model.generate_content(prompt)
-            suggestion = response.text
-            add_message(session_id, "bot", suggestion)
-            print(f"\n Suggestion:\n{suggestion}")
+        response = model.generate_content(prompt)
+        suggestion = response.text
+        add_message(session_id, "bot", suggestion[7:-3])
+        print(f"\n Suggestion:\n{suggestion}")
             
 
     # Phase 3: Follow-up Q&A
@@ -119,7 +119,7 @@ Based on this user profile:
 - Strengths: {answers.get('strengths', 'Not provided')}
 - Education: {answers.get('education', 'Not provided')}
 - Preferences: {answers.get('preferences', 'Not provided')}
-give answer in hypertext format html so frontend can just render it ,remove all stars,don't add css just html tags ,directly start from content inside body  remove body tag ,directly start from content inside body
+give answer in hypertext format html so frontend can just render it ,remove all stars,don't add css just html tags ,directly start from content inside body  remove body tag ,directly start from content inside body,give ready to put code in html format.
 
 
 User's question: {user_question}
@@ -129,8 +129,8 @@ User's question: {user_question}
         #fron user_doc
         session_id = user_doc["_id"]
         add_message(session_id, "user", user_question)
-        add_message(session_id, "bot", answer)
-        print(f" {answer}")
+        add_message(session_id, "bot", answer[7:-3])
+        print(f" {answer[6:-3]}")
 
 if __name__ == "__main__":
     run_bot()
