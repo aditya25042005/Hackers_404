@@ -49,7 +49,9 @@ useEffect(() => {
     try {
       const res = await axios.post("https://hackers-404-5.onrender.com/history/loadhistory", {
         email,
-      });
+      }, {
+    withCredentials: true,  // <--- Add this here
+  });
 
       const history = res.data.history;
 
@@ -118,10 +120,12 @@ useEffect(() => {
 
     try {
       const response = await axios.post(
-        "https://hackers-404-5.onrender.com/history/sendhistory",
-        {
-        sendPayload}
-      );
+  "https://hackers-404-5.onrender.com/history/sendhistory",
+  sendPayload, // Don't wrap it again
+  {
+    withCredentials: true // This ensures your cookie is sent
+  }
+);
 
       console.log(" Bot response received:", response.data);
 

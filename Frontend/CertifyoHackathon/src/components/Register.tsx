@@ -24,7 +24,9 @@ const Register:React.FC = () => {
                     name,
                     email,
                     password,
-                })
+                }, {
+    withCredentials: true,  // <--- Add this here
+  })
                 alert("OTP sent to your email.");
                 setOtpSent(true);
             }
