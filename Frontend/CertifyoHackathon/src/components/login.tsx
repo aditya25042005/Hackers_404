@@ -30,6 +30,7 @@ const Login: React.FC = () => {
                 alert("Login failed: " + res.data.message);
             }
         } catch (error: unknown) {
+             console.error("Login error:", error);
             if (axios.isAxiosError(error)) {
                 alert("Login error: " + (error.response?.data?.message || error.message));
             } else {

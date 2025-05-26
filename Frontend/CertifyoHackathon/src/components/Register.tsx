@@ -27,7 +27,7 @@ const Register:React.FC = () => {
                 }, {
     withCredentials: true,  // <--- Add this here
   })
-                alert("OTP sent to your email.");
+                alert("OTP sent to your email. check in your spam folder if not found in inbox");
                 setOtpSent(true);
             }
             else
@@ -41,7 +41,7 @@ const Register:React.FC = () => {
                 navigate('/login')
             }
         }catch (err) {
-            alert(`your account already exists ${err}`);
+            alert(`error occured ${err}`);
         } finally {
             setLoading(false);
         }
@@ -66,22 +66,22 @@ const Register:React.FC = () => {
                         <form onSubmit={handleSubmit} className="flex flex-col pt-3 md:pt-8">
                             <div className="flex flex-col pt-4">
                                 <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                                    <input value={name} onChange={(e)=>setName(e.target.value)} type="text" id="login-name" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Name" />
+                                    <input value={name} onChange={(e)=>setName(e.target.value)} type="text" id="login-name" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Name"  required/>
                                 </div>
                             </div>
                             <div className="flex flex-col pt-4">
                                 <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                                    <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" id="login-email" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Email" />
+                                    <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" id="login-email" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Email" required />
                                 </div>
                             </div>
                             <div className="flex flex-col pt-4">
                                 <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                                    <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" id="login-password" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Set gyour Password" />
+                                    <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" id="login-password" className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none" placeholder="Set your Password(minimum length is 4)"  required/>
                                 </div>
                             </div>
                             <div className="mb-12 flex flex-col pt-4">
                                 <div className="focus-within:border-b-gray-500 relative flex overflow-hidden border-b-2 transition">
-                                    <input value={otp} onChange={(e) => setOtp(e.target.value)} type="text" disabled={!otpSent} className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50" placeholder="OTP (check in spap folder)" />
+                                    <input value={otp} onChange={(e) => setOtp(e.target.value)} type="text" disabled={!otpSent} className="w-full flex-1 appearance-none border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50" placeholder="OTP (check in spam folder)" />
                                 </div>
                             </div>
                             <button type="submit" className="w-full rounded-lg bg-gray-900 px-4 py-2 text-center text-base font-semibold text-white shadow-md ring-gray-500 ring-offset-2 transition focus:ring-2 hover:bg-gray-700 cursor-pointer" disabled={loading}>
