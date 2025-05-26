@@ -151,7 +151,8 @@ res.cookie('token', token, {
   httpOnly: true,
     sameSite: 'lax',
 
- // secure: true,  // always send cookie only over HTTPS
+ 
+ //  // always send cookie only over HTTPS
   maxAge: 24 * 60 * 60 * 1000, // 1 day in milliseconds
 });
 res.status(200).json({message:"user found"})
