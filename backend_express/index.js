@@ -35,7 +35,7 @@ app.use(express.json(),cookieParser());          // parse JSON bodies
 
 
 app.use('/user', userrouter);
-app.use('/history',auth, historyrouter);
+app.use('/history', historyrouter);
 
 
 
