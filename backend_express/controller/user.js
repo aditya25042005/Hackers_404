@@ -200,12 +200,6 @@ catch(err){
 }
 
 
-
-
-
-
-
-
  export const  logout=async(req,res)=>{
 
 try{

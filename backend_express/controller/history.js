@@ -1,3 +1,4 @@
+
 import History from '../models/history.js';
 import axios from 'axios';
 
@@ -50,7 +51,9 @@ if(!questions.length){
     
     // Send the response from the external API to your frontend
   //  res.json(response.data);
-  res.status(200).json({ message: 'Data sent successfully', data: recent });
+  console.log(recent);
+  recent['chat_history'][0]["text"]=recent['chat_history'][0]["text"].slice(7,-3)
+  res.status(200).json({ message: 'Data sent successfully', data:  recent });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: 'Failed' });
@@ -128,4 +131,5 @@ return res.status(400).json({ message: err.message });
         res.status(400).json({ message: err.message });
     }
 }
+
 

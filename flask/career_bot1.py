@@ -4,7 +4,7 @@ from db import get_db
 from dotenv import load_dotenv
 import os
 import uuid
-
+from langchain.prompts import PromptTemplate
 # Load environment variables
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -64,7 +64,7 @@ def run_bot(email,user_new,message,questions):
     if user_new==True:
         session_id = start_session(email)
         for qdict in questions: 
-         for key, question in qdict.items():
+          for key, question in qdict.items():
  
             add_message(session_id, "bot", key)
             print(f" {question}")
@@ -74,38 +74,63 @@ def run_bot(email,user_new,message,questions):
             update_answers(session_id, key, answer)
 
             # Phase 2: Career Suggestion
-            prompt = f"""
-        Act like a professional career counselor.
+        prompt = f"""
+You are a professional career counselor.
 
-       User Profile:
+Based on this user profile:
 - Interests: {answers.get('interests', 'Not provided')}
 - Strengths: {answers.get('strengths', 'Not provided')}
 - Education: {answers.get('education', 'Not provided')}
 - Preferences: {answers.get('preferences', 'Not provided')}
-        Suggest:
-        1. Two career paths with short explanations.
-        2. Key skills needed for each path.
-        3. Two beginner-friendly learning resources (with links) per path.
-        Respond in a friendly, helpful tone.
-        """
-            response = model.generate_content(prompt)
-            suggestion = response.text
-            add_message(session_id, "bot", suggestion)
-            print(f"\n Suggestion:\n{suggestion}")
+
+Provide career suggestions strictly in the following numbered format:
+1. Career Path 1: <Description>
+2. Skills: <key skills for Career Path 1>
+3. Resources:
+https://resource1.com
+https://resource2.com
+
+4. Career Path 2: <Description>
+5. Skills: <key skills for Career Path 2>
+6. Resources:
+https://resource3.com
+https://resource4.com
+
+Only include URLs for resources, no extra text in the resources sections.give answer in hypertext format html so frontend can just render it ,remove all stars,don't add css just html tags ,directly start from content inside body  remove body tag ,directly start from content inside body
+Begin now:
+"""
+        response = model.generate_content(prompt)
+        suggestion = response.text
+        add_message(session_id, "bot", suggestion[7:-3])
+        print(f"\n Suggestion:\n{suggestion}")
+            
 
     # Phase 3: Follow-up Q&A
     elif user_new==False and user_doc:
         print("Welcome back! Let's continue.")
         user_question = message
         answers = user_doc["user_answers"]
-        follow_up_prompt = f"Based on the user's profile {answers}, answer this question: {user_question}"
+        print(answers)
+        follow_up_prompt = f"""
+You are a professional career counselor.
+
+Based on this user profile:
+- Interests: {answers.get('interests', 'Not provided')}
+- Strengths: {answers.get('strengths', 'Not provided')}
+- Education: {answers.get('education', 'Not provided')}
+- Preferences: {answers.get('preferences', 'Not provided')}
+give answer in hypertext format html so frontend can just render it ,remove all stars,don't add css just html tags ,directly start from content inside body  remove body tag ,directly start from content inside body,give ready to put code in html format.
+
+
+User's question: {user_question}
+"""
         response = model.generate_content(follow_up_prompt)
         answer = response.text
         #fron user_doc
         session_id = user_doc["_id"]
         add_message(session_id, "user", user_question)
-        add_message(session_id, "bot", answer)
-        print(f" {answer}")
+        add_message(session_id, "bot", answer[7:-3])
+        print(f" {answer[6:-3]}")
 
 if __name__ == "__main__":
     run_bot()
