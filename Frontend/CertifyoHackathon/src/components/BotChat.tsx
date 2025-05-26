@@ -47,7 +47,7 @@ useEffect(() => {
   // 🔁 Load history from backend
   const fetchHistory = async () => {
     try {
-      const res = await axios.post("http://localhost:8000/history/loadhistory", {
+      const res = await axios.post("https://hackers-404-5.onrender.com/history/loadhistory", {
         email,
       });
 
@@ -118,7 +118,7 @@ useEffect(() => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/history/sendhistory",
+        "https://hackers-404-5.onrender.com/history/sendhistory",
         sendPayload
       );
 

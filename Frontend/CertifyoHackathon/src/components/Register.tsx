@@ -20,7 +20,7 @@ const Register:React.FC = () => {
 
         try{
             if(!otpSent){
-                await axios.post("http://localhost:8000/user/createuser",{
+                await axios.post("https://hackers-404-5.onrender.com/user/createuser",{
                     name,
                     email,
                     password,
@@ -30,7 +30,7 @@ const Register:React.FC = () => {
             }
             else
             {
-                await axios.post("http://localhost:8000/user/createuser/otp", {
+                await axios.post("https://hackers-404-5.onrender.com/user/createuser/otp", {
                     name,
                     email,
                     password,
@@ -39,7 +39,7 @@ const Register:React.FC = () => {
                 navigate('/login')
             }
         }catch (err) {
-            alert(`${err}`);
+            alert(`your account already exists ${err}`);
         } finally {
             setLoading(false);
         }

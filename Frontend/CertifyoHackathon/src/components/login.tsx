@@ -14,7 +14,7 @@ const Login: React.FC = () => {
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            const res = await axios.post("http://localhost:8000/user/check",
+            const res = await axios.post("https://hackers-404-5.onrender.com/user/check",
                 {
                     email, password,
                 },
