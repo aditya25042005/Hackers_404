@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
           <select  onChange={handleChange} className="bg-black text-white border border-white px-2 py-1 rounded appearance-none">
             <option disabled selected value="More">More</option>
             <option value="about">About</option>
-            <option value="contact">Contact</option>
+            <option value="contact">Our Vision</option>
           </select>
         ) : (<>
           <NavLink to='/about' className={({ isActive }) =>
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
               isActive ? "text-orange-500 font-semibold ml-4" : "text-white hover:text-red-500 transition-colors duration-200"
             }
           >
-            Contact
+            Our Vison
           </NavLink>
         </>)
         }

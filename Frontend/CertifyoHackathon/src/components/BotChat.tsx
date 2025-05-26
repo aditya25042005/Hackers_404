@@ -119,12 +119,13 @@ useEffect(() => {
     try {
       const response = await axios.post(
         "https://hackers-404-5.onrender.com/history/sendhistory",
-        sendPayload
+        {withCredentials:true,
+        sendPayload}
       );
 
-      console.log("✅ Bot response received:", response.data);
+      console.log(" Bot response received:", response.data);
 
-      // 🔁 Instead of manually setting message, refetch all from backend
+      //  Instead of manually setting message, refetch all from backend
       await fetchHistory();
 
       if (isNewUser && updatedResponses.length === 4) {
@@ -132,7 +133,7 @@ useEffect(() => {
         setInitialResponses([]);
       }
     } catch (err) {
-      console.error("❌ Failed to send message or receive reply:", err);
+      console.error(" Failed to send message or receive reply:", err);
       const botMsg: Message = {
         from: "bot",
         text: "Sorry, something went wrong. Please try again.",
