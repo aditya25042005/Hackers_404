@@ -1,6 +1,6 @@
 # 🧠 Career Advisor Chatbot
 
-A full-stack AI-powered chatbot that provides career advice tailored to users' interests, strengths, and preferences. It uses **React** for the frontend, **Express.js** as a middleware API layer, and **Flask** to process AI responses with **Google Gemini**. It stores user data and history in **MongoDB**.
+A full-stack AI-powered chatbot that provides career advice tailored to users' interests, strengths, and preferences. It uses **React** for the frontend, **Express.js** as a middleware API layer, and **Flask** to process AI responses with **Google Gemini**.
 
 
 
@@ -14,7 +14,6 @@ A full-stack AI-powered chatbot that provides career advice tailored to users' i
   - Education
   - Preferences
 - Generates personalized career suggestions
-- Stores full chat history and user responses in a MongoDB collection
 - Allows returning users to ask follow-up questions based on their profile
 
 ## 🛠️ Technologies Used
@@ -40,7 +39,7 @@ cd hackers_404
 ### 🖥️ 2. Frontend (React)
 ```bash
 
-cd frontend/CertifyoHackathon
+cd Frontend/CertifyoHackathon
 npm install
 npm run dev
 ```
