@@ -14,7 +14,7 @@ A full-stack AI-powered chatbot that provides career advice tailored to users' i
   - Education
   - Preferences
 - Generates personalized career suggestions
-- Allows returning users to ask follow-up questions based on their profile
+- Allows returning users to ask follow-up questions  based on their profile and  chat history
 
 ## 🛠️ Technologies Used
 
