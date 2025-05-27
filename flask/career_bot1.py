@@ -60,13 +60,7 @@ def run_bot(email,user_new,message,questions):
     user_doc = collection.find_one({"email": email}, {"_id": 1, "user_answers": 1,"chat_history": 1})
     line=""
     i=0
-    for  history in user_doc["chat_history"][-10:]:
-        i+=1
-        if i==10:
-            break
-        #print(history)
-        line += ', '.join(f'{k}: {v}/n' for k, v in history.items())
-    print(line)
+    
 
     answers = {}
     print("Welcome to the Career Bot!")
@@ -116,6 +110,13 @@ Begin now:
 
     # Phase 3: Follow-up Q&A
     elif user_new==False and user_doc:
+        for  history in user_doc["chat_history"][-10:]:
+         i+=1
+         if i==10:
+          break
+        #print(history)
+         line += ', '.join(f'{k}: {v}/n' for k, v in history.items())
+         print(line)
         print("Welcome back! Let's continue.")
         user_question = message
         answers = user_doc["user_answers"]
@@ -130,6 +131,7 @@ Based on this user profile:
 - Preferences: {answers.get('preferences', 'Not provided')}
 and this  ishistory {line},here in text part coming after from :user means questions by user  and from:bot means replies by you
 give answer in hypertext format html so frontend can just render it ,remove all stars,don't add css just html tags ,directly start from content inside body  remove body tag ,directly start from content inside body,give ready to put code in html format.
+
 
 
 User's question: {user_question}
