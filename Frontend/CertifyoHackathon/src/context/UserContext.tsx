@@ -30,10 +30,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
                 }
             } catch {
                 console.log("User not logged in with cookies. Trying localStorage...");
-                const savedEmail = localStorage.getItem("userEmail");
-                if (savedEmail) {
-                    setUser({ email: savedEmail });
-                }
+                //const savedEmail = localStorage.getItem("userEmail");
+               // if (savedEmail) {
+              //      setUser({ email: savedEmail });
+              //  }
             }
         };
         fetchUser();
