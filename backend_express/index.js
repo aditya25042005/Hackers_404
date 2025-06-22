@@ -19,7 +19,7 @@ const allowedOrigins = [
   'http://localhost:5173',                    // Local development
   'https://hackers-404-4.onrender.com', 
   'https://hackers-404.vercel.app',
-  'https://onecode-ymp8.onrender.com/'
+  'https://onecode-ymp8.onrender.com'
 ];
 
 app.use(cors({
