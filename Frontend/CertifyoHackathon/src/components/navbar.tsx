@@ -16,6 +16,8 @@ const Navbar: React.FC = () => {
           withCredentials:true
         });
       setUser(null)
+      //localStorage.removeItem('userEmail') // clear cache;
+
       navigate('/login')
       }catch(err){
         console.log(err)

@@ -23,13 +23,14 @@ const Login: React.FC = () => {
                 }
             )
             if (res.data.message == "user found") {
-                localStorage.setItem("userEmail", email); // cache in localStorage
+             //   localStorage.setItem("userEmail", email); // cache in localStorage
                 setUser({ email });
                 navigate("/");
             } else {
                 alert("Login failed: " + res.data.message);
             }
         } catch (error: unknown) {
+             console.error("Login error:", error);
             if (axios.isAxiosError(error)) {
                 alert("Login error: " + (error.response?.data?.message || error.message));
             } else {

@@ -21,12 +21,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/user/give_email", {
+                const res = await axios.get("https://hackers-404-5.onrender.com/user/give_email", {
                     withCredentials: true,
                 });
                 if (res.data.email) {
                     setUser({ email: res.data.email });
-                    localStorage.setItem("userEmail", res.data.email); // cache in localStorage
+                   // localStorage.setItem("userEmail", res.data.email); // cache in localStorage
                 }
             } catch {
                 console.log("User not logged in with cookies. Trying localStorage...");
