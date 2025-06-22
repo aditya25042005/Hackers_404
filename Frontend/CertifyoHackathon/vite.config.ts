@@ -16,7 +16,7 @@ export default defineConfig({
     host: true,
     port: Number(process.env.PORT) || 5173,
     allowedHosts: [
-      'hackers-404-4.onrender.com'
+      'https://onecode-ymp8.onrender.com/'
     ]
   }
 })
