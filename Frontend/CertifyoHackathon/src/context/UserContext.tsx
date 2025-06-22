@@ -21,7 +21,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get("https://hackers-404-5.onrender.com/user/give_email", {
+                const res = await axios.get("https://hackers-404-7w9h.onrender.com/user/give_email", {
                     withCredentials: true,
                 });
                 if (res.data.email) {
