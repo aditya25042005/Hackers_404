@@ -30,7 +30,7 @@ if(!questions.length){
 
     try {
     // Replace with the API you want to call
-    const response = await axios.post('https://hackers-404-2.onrender.com//bot', {
+    const response = await axios.post('https://hackers-404-flask.onrender.com/bot', {
       email: email,
       questions: questions,
       user_new:news,
