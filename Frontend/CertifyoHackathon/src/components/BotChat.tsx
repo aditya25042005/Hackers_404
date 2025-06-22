@@ -120,7 +120,7 @@ useEffect(() => {
 
     try {
       const response = await axios.post(
-  "https://hackers-404-5.onrender.com/history/sendhistory",
+  "https://hackers-404-7w9h.onrender.com/history/sendhistory",
   sendPayload, // Don't wrap it again
   {
     withCredentials: true // This ensures your cookie is sent
