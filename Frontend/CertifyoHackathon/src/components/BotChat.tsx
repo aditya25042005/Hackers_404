@@ -47,7 +47,7 @@ useEffect(() => {
   // 🔁 Load history from backend
   const fetchHistory = async () => {
     try {
-      const res = await axios.post("https://hackers-404-5.onrender.com/history/loadhistory", {
+      const res = await axios.post("https://hackers-404-7w9h.onrender.com/history/loadhistory", {
         email,
       }, {
     withCredentials: true,  // <--- Add this here
