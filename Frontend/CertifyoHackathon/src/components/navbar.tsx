@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
 
     const handleLogout=async()=>{
       try{
-        await axios.get("https://hackers-404-5.onrender.com/user/logout",{
+        await axios.get("https://hackers-404-7w9h.onrender.com/user/logout",{
           withCredentials:true
         });
       setUser(null)
